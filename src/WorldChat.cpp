@@ -62,8 +62,8 @@ std::string world_chat_GMIcon = "|TINTERFACE/CHATFRAME/UI-CHATICON-BLIZZ:13:13:0
 /* COLORED TEXT FOR CURRENT FACTION || NOT FOR GMS */
 std::string world_chat_TeamIcon[2] =
 {
-    "|cff3399FFAlliance|r",
-    "|cffCC0000Horde|r"
+    "|cff3399FF联盟|r",
+    "|cffCC0000部落|r"
 };
 
 /* Config Variables */
@@ -112,17 +112,17 @@ std::unordered_map<uint32, ChatElements>WorldChat;
 void SendWorldMessage(Player* sender, const char* msg, int team) {
 
     if (!WC_Config.Enabled) {
-        ChatHandler(sender->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
+        ChatHandler(sender->GetSession()).PSendSysMessage("[世界] %s世界聊天系统被禁用。|r", WORLD_CHAT_RED.c_str());
         return;
     }
 
     if (!sender->CanSpeak()) {
-        ChatHandler(sender->GetSession()).PSendSysMessage("[WC] %sYou can't use World Chat while muted!|r", WORLD_CHAT_RED.c_str());
+        ChatHandler(sender->GetSession()).PSendSysMessage("[世界] %s禁用时无法使用世界聊天!|r", WORLD_CHAT_RED.c_str());
         return;
     }
 
     if (!WorldChat[sender->GetGUID()].chat) {
-        ChatHandler(sender->GetSession()).PSendSysMessage("[WC] %sWorld Chat is hidden. (.chat off)|r", WORLD_CHAT_RED.c_str());
+        ChatHandler(sender->GetSession()).PSendSysMessage("[世界] %s世界聊天是隐藏的。(.chat off)|r", WORLD_CHAT_RED.c_str());
         return;
     }
 
@@ -206,18 +206,18 @@ public:
         uint64 guid = player->GetGUID();
 
         if (!WC_Config.Enabled) {
-            ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
+            ChatHandler(player->GetSession()).PSendSysMessage("[世界] %s世界聊天系统被禁用。|r", WORLD_CHAT_RED.c_str());
             return true;
         }
 
         if (WorldChat[guid].chat) {
-            ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is already visible.|r", WORLD_CHAT_RED.c_str());
+            ChatHandler(player->GetSession()).PSendSysMessage("[世界] %s世界聊天已经可见。|r", WORLD_CHAT_RED.c_str());
             return true;
         }
 
         WorldChat[guid].chat = 1;
 
-        ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now visible.|r", WORLD_CHAT_GREEN.c_str());
+        ChatHandler(player->GetSession()).PSendSysMessage("[世界] %s世界聊天现在可见。|r", WORLD_CHAT_GREEN.c_str());
 
         return true;
     };
@@ -228,18 +228,18 @@ public:
         uint64 guid = player->GetGUID();
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
-            ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
+            ChatHandler(player->GetSession()).PSendSysMessage("[世界] %s世界聊天系统被禁用。|r", WORLD_CHAT_RED.c_str());
             return true;
         }
 
         if (!WorldChat[guid].chat) {
-            ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is already hidden.|r", WORLD_CHAT_RED.c_str());
+            ChatHandler(player->GetSession()).PSendSysMessage("[世界] %s世界聊天已经被隐藏了。|r", WORLD_CHAT_RED.c_str());
             return true;
         }
 
         WorldChat[guid].chat = 0;
 
-        ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now hidden.|r", WORLD_CHAT_GREEN.c_str());
+        ChatHandler(player->GetSession()).PSendSysMessage("[世界] %sWorld Chat现在被隐藏了。|r", WORLD_CHAT_GREEN.c_str());
 
         return true;
     };
@@ -273,7 +273,7 @@ public:
         // Announce Module
         if (WC_Config.Enabled && WC_Config.Announce)
         {
-            ChatHandler(player->GetSession()).SendSysMessage(("This server is running the |cff4CFF00WorldChat |rmodule. Use .chat" + ((WC_Config.ChannelName != "") ? " or use /join " + WC_Config.ChannelName : "") + " to communicate"+ ((!WC_Config.CrossFaction) ? " with your faction." : ".")).c_str());
+            ChatHandler(player->GetSession()).SendSysMessage(("服务器已启用 |cff4CFF00世界聊天 |r模块。 使用 .chat" + ((WC_Config.ChannelName != "") ? " 或使用 /join " + WC_Config.ChannelName : "") + " 进行沟通"+ ((!WC_Config.CrossFaction) ? " 你的阵营。" : ".")).c_str());
         }
     }
 

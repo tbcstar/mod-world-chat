@@ -3,31 +3,31 @@
 - Latest build status with azerothcore: [![Build Status](https://github.com/azerothcore/mod-world-chat/workflows/core-build/badge.svg?branch=master&event=push)](https://github.com/azerothcore/mod-world-chat)
 
 # Description
-World Chat Module is a simple global ( faction or cross-faction ) chat for AzerothCore.
+世界聊天模块是AzerothCore的简单全局聊天（派系或跨派）。
 
 # Functionality
-* How to chat?
-    - .chat Message - This works for everyone, GM and players.
-    - /join World and talk as in a normal chat ( This name is subject of change based on the config file )
+* 怎么聊天？
+    - .chat Message - 适用于所有人，GM和玩家。
+    - /join 像普通聊天中一样聊天并聊天（此名称根据配置文件而异）
 
-* How a GM can send a message to the other faction chat if cross-faction is disabled?
-    - Use .chat command followed by the initial of the faction ( Example: For horde use .chath <Message> )
+* 如果禁用跨派系，GM如何向其他派系聊天发送消息？
+    - 使用.chat命令，后跟该派系的首字母（例如：对于部落，请使用.chath）
     
-* How can i show or hide by gm status?
-    - You can show your GM or DEV status by having .gm chat on and .gm on. Also you can be shown as a DEV if you have .dev on
+* 如何按GM状态显示或隐藏？
+    - 您可以通过打开.gm chat和.gm on来显示GM或DEV状态。如果您用.dev on上也可以显示为DEV
 
 # Commands
-List of fully functional commands:
+功能齐全的命令列表：
 * .chat <$TEXT>
-  - Used to talk on the World Chat
+  - 用于世界聊天的命令
 * .chat on
-  - Used to enable World Chat
+  - 用于启用世界聊天
 * .chat off
-  - Used to disable World Chat
+  - 用于禁用世界聊天
 * .chata <$TEXT>
-  - Used to talk for GM's to alliance faction ( so you can talk to the other faction when cross-faction world chat is disabled )
+  - 用于与GM与联盟派系进行对话（因此，在跨派世界聊天被禁用时，您可以与另一派系进行对话）
 * .chath <$TEXT>
-  - Used to talk for GM's to horde faction ( so you can talk to the other factions when cross-faction world chat is disabled )
+  - 过去曾与GM争夺部落派系交谈（因此在跨派世界聊天被禁用时，您可以与其他派系交谈）
   
 # Installation
 ## Core Setup
