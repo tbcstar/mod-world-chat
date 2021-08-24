@@ -70,7 +70,7 @@ std::string world_chat_TeamIcon[2] =
 struct WCConfig
 {
     bool Enabled;
-    string ChannelName;
+    std::string ChannelName;
     bool LoginState;
     bool CrossFaction;
     bool Announce;
@@ -114,8 +114,8 @@ void SendWorldMessage(Player* sender, const char* msg, int team) {
         return;
     }
 
-    if (!WorldChat[sender->GetGUID()].chat) {
-        ChatHandler(sender->GetSession()).PSendSysMessage("[世界] %s世界聊天是隐藏的。(.chat off)|r", WORLD_CHAT_RED.c_str());
+    if (!WorldChat[sender->GetGUID().GetCounter()].chat) {
+        ChatHandler(sender->GetSession()).PSendSysMessage("[世界] %s隐藏世界聊天 (.chat off)|r", WORLD_CHAT_RED.c_str());
         return;
     }
 
@@ -137,7 +137,7 @@ void SendWorldMessage(Player* sender, const char* msg, int team) {
         }
 
         Player* target = itr->second->GetPlayer();
-        uint64 guid2 = target->GetGUID();
+        uint64 guid2 = target->GetGUID().GetCounter();
 
         if (WorldChat[guid2].chat == 1 && (team == -1 || target->GetTeamId() == team))
         {
@@ -196,7 +196,7 @@ public:
     static bool HandleWorldChatOnCommand(ChatHandler* handler, const char* /*msg*/)
     {
         Player* player = handler->GetSession()->GetPlayer();
-        uint64 guid = player->GetGUID();
+        uint64 guid = player->GetGUID().GetCounter();
 
         if (!WC_Config.Enabled) {
             ChatHandler(player->GetSession()).PSendSysMessage("[世界] %s世界聊天系统被禁用。|r", WORLD_CHAT_RED.c_str());
@@ -218,7 +218,7 @@ public:
     static bool HandleWorldChatOffCommand(ChatHandler* handler, const char* /*msg*/)
     {
         Player* player = handler->GetSession()->GetPlayer();
-        uint64 guid = player->GetGUID();
+        uint64 guid = player->GetGUID().GetCounter();
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
             ChatHandler(player->GetSession()).PSendSysMessage("[世界] %s世界聊天系统被禁用。|r", WORLD_CHAT_RED.c_str());
